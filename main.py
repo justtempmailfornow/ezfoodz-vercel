@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from fastapi.responses import RedirectResponse
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -48,6 +49,10 @@ app.include_router(orders_router)
 app.include_router(payments_router)
 
 
+
 @app.get("/")
 def root():
-    return FileResponse("restaurant.html")
+    return RedirectResponse(
+        url="https://justtempmailfornow.github.io/ezfoodz-vercel/",
+        status_code=302  # or 307
+    )
